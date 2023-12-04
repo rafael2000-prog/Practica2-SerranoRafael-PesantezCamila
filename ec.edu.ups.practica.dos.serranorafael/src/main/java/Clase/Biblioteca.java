@@ -102,12 +102,27 @@ public class Biblioteca {
 	
 	public void prestarLibro(Libro libro, Usuario usuario) {
 	    if (libro.isDisponible()) {
-	        Prestamo prestamo = new Prestamo(libro, usuario, new Date(), null);
-	        
-	        libro.setDisponible(false);
-	        usuario.getListaPrestamo().add(prestamo);
-	        
+	        if (!estaLibroPrestado(libro)) {
+	            Prestamo prestamo = new Prestamo(libro, usuario, new Date(), null);
+	            libro.setDisponible(false);
+	            usuario.getListaPrestamo().add(prestamo);
+	        } else {
+	            System.out.println("El libro ya está prestado a otro usuario.");
+	        }
+	    } else {
+	        System.out.println("El libro no está disponible para préstamo.");
 	    }
+	}
+
+	private boolean estaLibroPrestado(Libro libro) {
+	    for (Usuario usuario : listaUsuario) {
+	        for (Prestamo prestamo : usuario.getListaPrestamo()) {
+	            if (prestamo.getLibro().equals(libro) && prestamo.getFechaDevolucion() == null) {
+	                return true; 
+	        }
+	    }
+	}
+		return false;
 	}
 	
 	public void devolverLibro(Libro libro, Usuario usuario) {
