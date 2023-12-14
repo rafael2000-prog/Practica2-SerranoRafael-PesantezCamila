@@ -144,6 +144,28 @@ public class Biblioteca {
 		
 	}
 	
+public Libro buscarLibroAño(int año) {
+		for (int i=0; i<listaLibro.size(); i++) {
+			Libro libro = listaLibro.get(i);
+			if (libro.getAño()== año) {
+				return libro;
+			}
+		}
+		System.out.println("No hay libros del año: " + año);
+		return null;
+	}
+	
+	public Libro buscarLibroAutor(String autor) {
+		for (int i=0; i<listaLibro.size(); i++) {
+			Libro libro = listaLibro.get(i);
+			if (libro.getAutor().equalsIgnoreCase(autor)) {
+				return libro;
+			}
+		}
+		System.out.println("No hay libros del autor: " + autor);
+		return null;
+	}
+
 
 	@Override
 	public String toString() {
