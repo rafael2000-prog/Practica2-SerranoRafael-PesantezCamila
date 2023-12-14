@@ -56,19 +56,63 @@ public class Principal {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el título del libro a buscar: ");
-                    String tituloBusqueda = scanner.nextLine();
-                    
-                    Libro libroBusqueda = biblioteca.buscarLibro(tituloBusqueda);
+                	int opcion1;
+                	do {
+                		System.out.println("1. Busqueda por titulo");
+                        System.out.println("2. Busqueda por año");
+                        System.out.println("3. Busqueda por autor");
+                        System.out.println("4. Salir");
+                        opcion1 = scanner.nextInt();
+                        switch(opcion1) {
+                        
+                        case 1:
+                        	System.out.print("Ingrese el título del libro a buscar: ");
+                            String tituloBusqueda = scanner.next();
+                            Libro libroBusqueda = biblioteca.buscarLibro(tituloBusqueda);
+                            if (libroBusqueda != null) {
+                                System.out.println("Resultados de la búsqueda:");
+                                System.out.println(libroBusqueda.mostrarInformacion());
+                            } else {
+                                System.out.println("Libro no encontrado.");
+                            }
+                            break;
 
-                    if (libroBusqueda != null) {
-                        System.out.println("Resultados de la búsqueda:");
-                        System.out.println(libroBusqueda.mostrarInformacion());
-                    } else {
-                        System.out.println("Libro no encontrado.");
-                    }
+                            
+                        case 2:
+                        	System.out.print("Ingrese el año del libro a buscar: ");
+                            int añoBusqueda = scanner.nextInt();
+                            Libro libroBusquedaAño = biblioteca.buscarLibroAño(añoBusqueda);
+                            if (libroBusquedaAño != null) {
+                                System.out.println("Resultados de la búsqueda:");
+                                System.out.println(libroBusquedaAño.mostrarInformacion());
+                            } else {
+                                System.out.println("Libro no encontrado.");
+                            }
+                        	break;
+                        	
+                        case 3:
+                        	System.out.print("Ingrese el autor del libro a buscar: ");
+                        	String autorBusqueda = scanner.next();
+                        	Libro libroBusquedaAutor = biblioteca.buscarLibroAutor(autorBusqueda);
+                        	if (libroBusquedaAutor != null) {
+                                System.out.println("Resultados de la búsqueda:");
+                                System.out.println(libroBusquedaAutor.mostrarInformacion());
+                            } else {
+                                System.out.println("Libro no encontrado.");
+                            }
+                            break;
+                        
+                        case 4:
+                        	System.out.println("Saliendo de busqueda");
+                        	break;
+                            
+                        default:
+                            System.out.println("Opción no válida. Por favor intente de nuevo.");
+                        }
+                        
+                	}while (opcion1 != 4);
+                	
                     break;
-
                 case 4:
                     System.out.print("Ingrese el título del libro a prestar: ");
                     String tituloPrestamo = scanner.nextLine();
